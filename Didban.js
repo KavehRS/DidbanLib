@@ -9,20 +9,23 @@
  ****************************************************************/
 
 
-// Nourozzadeh api
-var url = "http://192.168.200.35:8000/api/",
-    auth_token = "Token 2156356dfa66dfd64b60ca2992509ada", sys_id = "iribcsspr99", system_id;
+// Local variables
+
+var url = "http://192.168.200.35:8000/api/", url = "http://localhost:8000/api/",
+    auth_token = "Token 2156356dfa66dfd64b60ca2992509ada", sys_id = "Developer4", system_id;
 var user_id, active_session, ip, session_id, ttl = 30, ttl = 30, counter = ttl;
-
-
-
-
-
+// Enumerations
 var ACTIVITY = {Play: 1, Pause: 2, FDStart: 3, FDEnd: 4, BDStart: 5, BDEnd: 6, ContentView: 7,};
 var SERVICE_TYPE = {Live: 1, TimeShift: 2, CatchUp: 3, OnDemand: 4,};
 var CONTENT_TYPE = {Video: 1, Audio: 2, Image: 3, Text: 4,};
-
+/**
+ * Get the user IP throught the webkitRTCPeerConnection
+ * @param onNewIP {Function} listener function to expose the IP locally
+ * @return undefined
+ */
 function getUserIP(onNewIP) {
+    //  onNewIp - your listener function for new IPs
+    //compatibility for firefox and chrome
     var myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
     var pc = new myPeerConnection({
             iceServers: []
@@ -38,6 +41,7 @@ function getUserIP(onNewIP) {
         if (!localIPs[ip] && ip != '0.0.0.0') onNewIP(ip);
         ipFound = true;
     }
+
 
 
     pc.createDataChannel("");
